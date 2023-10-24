@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %} Students {% endblock %}
+
+{% block start %}
+
+<div>
+    <h1>Students Details</h1>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Student ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Age</th>
+            <th scope="col">Address</th>
+            <th scope="col">Department</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>
+                    <a href="{% url 'get_marks' student.student_id %}">
+                        {{student.student_id}}
+                    </a>
+                </td>
+                <td>{{student.student_name}}</td>
+                <td>{{student.student_email}}</td>
+                <td>{{student.student_age}}</td>
+                <td>{{student.student_address}}</td>
+                <td>{{student.department}}</td>
+                <td><a href="{% url 'delete_student' student.student_id %}">Delete</a></td>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+
+      <nav aria-label="...">
+        <ul class="pagination pagination-lg">
+            <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+            <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+            <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
+        </ul>
+    </nav>
+
+      
+    
+</div>
+<div>
+    <h2>Total Student Count: {{total_users}}</h2>
+    <h2>Original Student Count: {{original_count}}</h2>
+</div>
+
+{% endblock %}

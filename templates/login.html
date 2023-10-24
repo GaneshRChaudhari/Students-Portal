@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block start %}
+
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% else %}alert-info{% endif %}" role="alert">
+                    {{ message.message }}
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="mb-3" style="width: 400px; margin: 20px 20px 20px 20px">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Username</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" name="username" placeholder="Enter your email id">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+            </div>
+            <div class="mb-3">
+                <label>Don't have an account? <a href="{% url 'registration_page' %}">Register</a></label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
